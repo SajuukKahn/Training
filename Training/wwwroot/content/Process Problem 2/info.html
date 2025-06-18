@@ -1,0 +1,24 @@
+<p class="p-lg-5">Customer states that while this machine is running Production, after the first board comes in, the upstream machine does not wait at the outlet before attempting to move in a board.</p>
+
+<details class="hint" data-hint>
+    <summary>Hint 1</summary>
+    <p>All Lane Entry Conditions are correct.</p>
+</details>
+
+<details class="hint" data-hint>
+    <summary>Hint 2</summary>
+    <p>One script is missing.</p>
+</details>
+
+<details class="hint" data-hint>
+    <summary>Hint 3</summary>
+    <p>The missing script is sourced from 'Previous Machine'</p>
+</details>
+
+<details class="answer" data-answer>
+    <summary>Answer</summary>
+    <p>Move to Process Lane</p>
+    <p>This lane is missing the SMEMA Not Ready script.</p>
+    <p>Find the 'Previous Machine' source in the toolbox and add the script to the lane.</p>
+    <p>Configure the script to turn off the Upstream Ready signal.</p>
+</details>

@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Training Exercises";
+}
+
+<div class="text-center">
+    <img id="logo" src="~/img/PMX-BR_wrdmrk-resized.png" />
+    <h1 class="display-4">Training Exercises</h1>
+
+    <div class="container py-4">
+        @foreach (var example in Model.Examples)
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">@example.Name</h5>
+                </div>
+                <div class="card-body text-start problem">
+                    @{
+                        var downloadsFullPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "content", example.Name, "Downloads");
+                        var downloadsRelativePath = $"/content/{example.Name}/Downloads";
+
+                        string[] downloadFiles = Array.Empty<string>();
+                        if (Directory.Exists(downloadsFullPath))
+                        {
+                            downloadFiles = Directory.GetFiles(downloadsFullPath);
+                        }
+                    }
+
+                    @if (downloadFiles.Length > 0)
+                    {
+                        <p><strong>Download Files:</strong></p>
+                        <ul>
+                            @foreach (var file in downloadFiles)
+                            {
+                                var fileName = System.IO.Path.GetFileName(file);
+                                <li><a href="@($"{downloadsRelativePath}/{fileName}")" download>@fileName</a></li>
+                            }
+                        </ul>
+                    }
+
+                    <div class="align-items-xl-start">
+                        @Html.Raw(System.IO.File.ReadAllText($"wwwroot\\content{example.InfoHtmlPath.Replace('/', System.IO.Path.DirectorySeparatorChar)}"))
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

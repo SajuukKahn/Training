@@ -1,0 +1,33 @@
+<p class="p-lg-5">Customer states that the machine runs normally the first cycle but then doesn't inlet any more boards until they trigger the inlet pip, then it runs normally for the rest of the Batch.</p>
+
+<details class="hint" data-hint>
+    <summary>Hint 1</summary>
+    <p>There are two problems with this Process, fixing either one will correct the issue.</p>
+</details>
+
+<details class="hint" data-hint>
+    <summary>Hint 2</summary>
+    <p>All Lane Entry Conditions are correct.</p>
+</details>
+
+<details class="hint" data-hint>
+    <summary>Hint 3</summary>
+    <p>There is one missing script.</p>
+</details>
+
+<details class="hint" data-hint>
+    <summary>Hint 4</summary>
+    <p>One of the Lane's Run Settings is incorrectly configured.</p>
+</details>
+
+<details class="answer" data-answer>
+    <summary>Answer</summary>
+    <p>Problem 1: Missing Script</p>
+    <p>The `Move In To Inlet` Lane is missing the `SMEMA Conveyor Ready` script.</p>
+    <p>Find the 'Previous Machine' source in the toolbox and add the script to the lane.</p>
+    <p>Configure the script to turn on the Upstream Ready signal.</p>
+    <br/>
+    <p>Problem 2: Misconfigured Lane Run Setting</p>
+    <p>The `SMEMA Ready Lane` Lane has its Run Setting configured incorrectly.</p>
+    <p>The Run Setting is set to `Run Always Skip First Cycle`, but should be `Run Always Skip Last Cycle`</p>
+</details>

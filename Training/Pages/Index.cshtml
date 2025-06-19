@@ -18,7 +18,7 @@
                 <div class="card-body text-start problem">
                     @{
                         var downloadsFullPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "content", example.Name, "Downloads");
-                        var downloadsRelativePath = $"/content/{example.Name}/Downloads";
+                        var downloadsRelativePath = $"content/{example.Name}/Downloads";
 
                         string[] downloadFiles = Array.Empty<string>();
                         if (Directory.Exists(downloadsFullPath))
@@ -29,12 +29,14 @@
 
                     @if (downloadFiles.Length > 0)
                     {
-                        <p><strong>Download Files:</strong></p>
+                        <p><strong>Files:</strong></p>
                         <ul>
                             @foreach (var file in downloadFiles)
                             {
                                 var fileName = System.IO.Path.GetFileName(file);
-                                <li><a href="@($"{downloadsRelativePath}/{fileName}")" download>@fileName</a></li>
+                                <li>
+                                    <a download href="@Url.Page("Index", "DownloadFile", new { path = $"{downloadsRelativePath}/", file = $"{fileName}" })">@($"{fileName}")</a>
+                                </li>
                             }
                         </ul>
                     }

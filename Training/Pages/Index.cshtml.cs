@@ -1,7 +1,10 @@
 namespace Training.Pages
 {
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using System.Diagnostics;
     using System.IO;
+    using System.Text;
 
     public class IndexModel : PageModel
     {
@@ -20,6 +23,18 @@ namespace Training.Pages
 
                 Examples.Add(new ExampleInfo(name, infoHtmlPath, filePath));
             }
+        }
+        public FileResult SaveFile(string data)
+        {
+            using var stream = System.IO.File.OpenRead(data);
+            return File(stream, "application/json");
+        }
+
+        public FileResult OnGetDownloadFile(string path, string file)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", path, file);
+            byte[] bytes = System.IO.File.ReadAllBytes(filePath);
+            return File(bytes, "application/octet-stream", file);
         }
 
         public class ExampleInfo(string name, string infohtmlpath, string filedownloadpath)
